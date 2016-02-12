@@ -1,0 +1,43 @@
+<div>
+  <h3>{{ playlist.name }}</h3>
+  <table class='table' ng-show="playlist.songs.length">
+    <thead>
+      <tr>
+        <th></th>
+        <th>Name</th>
+        <th>Artists</th>
+        <th>Genres</th>
+      </tr>
+    </thead>
+    <tbody ng-sortable ng-model="playlist.songs">
+      <tr ng-repeat="song in playlist.songs" ng-class="{active: song === getCurrentSong() }">
+        <td>
+          <button class="btn btn-default btn-xs" ng-click="toggle(song)">
+            <span class="glyphicon" ng-class="{ 'glyphicon-pause': isPlaying(song), 'glyphicon-play': !isPlaying(song) }"></span>
+          </button>
+        </td>
+        <td>{{ song.name }}</td>
+        <td><span ng-repeat="artist in song.artists">{{ artist.name }}{{ $last ? '' : ', ' }}</span></td>
+        <td>{{ song.genres.join(', ') }}</td>
+        <td><button class="glyphicon glyphicon-remove" ng-click="deleteSong(playlist._id, song._id)"></button>
+          </td>
+      </tr>
+    </tbody>
+  </table>
+  <small ng-hide="playlist.songs.length">No songs.</small>
+  <div>
+  <h3>Add to PLaylist</h3>
+    <form name="songForm">
+    <div>
+    Song <select ng-model="song" ng-options="song as song.name for song in songs" name="songName" ng-required="true"></select>
+    </div>
+<!--     <div class="alert alert-warning" ng-show="playListForm.$dirty && playListForm.$invalid">Please enter 16 character name</div>
+    <div> -->
+      <button class="btn btn-primary" type="submit" ng-disabled="songForm.$invalid" ng-click ="addSong(playlist._id, song)"> Add Song</button>
+     </div> 
+    <!-- <pre>{{songForm | json}}</pre> -->
+  </form>
+</div>
+
+  <hr>
+</div>

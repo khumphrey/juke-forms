@@ -1,0 +1,18 @@
+<div>
+  <h3>New PLaylist</h3>
+  <form name="playListForm">
+  <div>
+  Title <input ng-model="playList.name" name="playListName" ng-required="true" ng-maxlength='16'></input>
+</div>
+<div ng-show="playListForm.$dirty" ng-messages="playListForm.playListName.$error" role="alert">
+	<div class="alert alert-warning" ng-message="required">You did not enter a Title for your Playlist</div>
+	<div class="alert alert-warning" ng-message="maxlength">Your Playlist Title needs to be less than 16 characters</div>
+</div>
+<!--   <div class="alert alert-warning" ng-show="playListForm.$dirty && playListForm.$invalid">Please enter 16 character name</div>
+  <div> -->
+    <button class="btn btn-primary" type="submit" ng-disabled="playListForm.$invalid" ng-click ="create(playList)"> Add Playlist</button>
+   </div> 
+<!--   <pre>The new playlist: {{ playList }}</pre>
+  <pre>{{playListForm | json}}</pre> -->
+</form>
+</div>
